@@ -74,7 +74,6 @@ const onClickComplete = (tagetButton) => {
   // 対象のTODOｎ名称を取得する
   const targetIncompleteLi = getIncompleteli(tagetButton);
   const todoName = getTodoName(targetIncompleteLi);
-  console.log(todoName);
 
   // 追加用のli要素を生成する
   const compliteLi = document.createElement("li");
@@ -86,20 +85,19 @@ const onClickComplete = (tagetButton) => {
   const divActionButtons = document.createElement("div");
   divActionButtons.className = "action-buttons";
 
-  //<button>完了</button>
+  //<button>戻す</button>
   const buttonReset = document.createElement("button");
   buttonReset.innerText = "戻す";
   divActionButtons.appendChild(buttonReset);
   buttonReset.addEventListener("click", () => {
-    // #outer要素の親要素を取得
+    // クリックされたボタンから、親のli要素を取得する
     const parentLi = getIncompleteli(buttonReset);
-
+    // 対象のTODOの名称を取得する
     const todoName = getTodoName(parentLi);
-    console.log(todoName);
-
+    // todo名を引数に、未完了Uiに該当のTODOを追加する
     onClickAdd(todoName);
 
-    // Ui要素を取得し、該当のli要素を削除
+    // 完了のUi要素を取得し、該当のli要素を削除
     const incompleteList = document.getElementById("complete-list");
     incompleteList.removeChild(parentLi);
   });
@@ -108,7 +106,7 @@ const onClickComplete = (tagetButton) => {
   divListRow.appendChild(divActionButtons);
   compliteLi.appendChild(divListRow);
 
-  // Ui要素に再生したli要素を追加する
+  // 完了のUi要素に生成したli要素を追加する
   const completeList = document.getElementById("complete-list");
   completeList.appendChild(compliteLi);
 
